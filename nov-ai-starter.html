@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b16">
+  <title>Nov — Your AI Space</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #11172a;
+      --panel2: #0d1222;
+      --text: #f1f5ff;
+      --muted: #9ba8c7;
+      --line: #273252;
+      --blue: #77a7ff;
+      --violet: #a78bfa;
+      --good: #8ce5c1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text);
+      background: radial-gradient(ellipse at top, #172044 0%, var(--bg) 55%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .app { width: 100%; max-width: 430px; }
+    .brand { text-align: center; margin-bottom: 22px; }
+    .orb {
+      width: 54px; height: 54px; margin: 0 auto 12px; border-radius: 18px;
+      display: grid; place-items: center; font-size: 26px; font-weight: 800;
+      color: white; background: linear-gradient(135deg, #4d8cff, #9a72ff);
+      box-shadow: 0 0 34px #647dff3b;
+    }
+    h1 { margin: 0; font-size: 30px; letter-spacing: .04em; }
+    .tagline { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .card {
+      border: 1px solid var(--line); border-radius: 22px; padding: 24px;
+      background: linear-gradient(155deg, #151c33f2, #0d1222f5);
+      box-shadow: 0 18px 60px #0005;
+    }
+    h2 { font-size: 20px; margin: 0 0 7px; }
+    .intro { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 0 22px; }
+    label { display: block; font-size: 13px; color: #dce5ff; margin: 15px 0 7px; }
+    input {
+      display: block; width: 100%; min-height: 46px; border: 1px solid #303b5e;
+      border-radius: 12px; padding: 12px 13px; color: var(--text);
+      background: #090e1d; font: inherit; outline: none;
+    }
+    input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px #77a7ff20; }
+    button {
+      width: 100%; min-height: 47px; margin-top: 20px; border: 0; border-radius: 12px;
+      background: linear-gradient(100deg, #5d91ff, #9a78ff); color: white;
+      font: inherit; font-weight: 700; cursor: pointer;
+    }
+    button:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+    button.secondary { background: #1b2542; border: 1px solid #334064; margin-top: 10px; }
+    .notice { margin-top: 16px; padding: 11px 12px; border-radius: 11px; color: #c9d5f4;
+      background: #0a1020; border: 1px solid #273252; font-size: 12px; line-height: 1.5; }
+    .error { color: #ffb4bd; font-size: 13px; margin-top: 10px; min-height: 18px; }
+    .hidden { display: none !important; }
+    .profile-head { display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; }
+    .avatar {
+      width: 64px; height: 64px; border-radius: 20px; flex: 0 0 auto; display: grid;
+      place-items: center; background: linear-gradient(135deg, #2b77bd, #8053ce);
+      font-size: 25px; font-weight: 800;
+    }
+    .email { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; margin-top: 4px; }
+    .stat { border: 1px solid var(--line); background: #0b1121; border-radius: 13px; padding: 13px; margin-top: 10px; }
+    .stat-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .stat-value { margin-top: 5px; font-weight: 650; font-size: 14px; }
+    footer { color: #7e8baa; text-align: center; font-size: 11px; margin: 18px 8px 0; line-height: 1.5; }
+    @media (max-width: 360px) { body { padding: 12px; } .card { padding: 19px; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="brand">
+      <div class="orb" aria-hidden="true">N</div>
+      <h1>NOV</h1>
+      <div class="tagline">A little space for big ideas.</div>
+    </header>
+
+    <section class="card" id="loginPage">
+      <h2>Welcome back</h2>
+      <p class="intro">Sign in to preview your personal Nov profile.</p>
+      <form id="loginForm">
+        <label for="displayName">Your name</label>
+        <input id="displayName" name="displayName" autocomplete="nickname" maxlength="40"
+               placeholder="e.g. Alex" required>
+        <label for="email">Email address (demo only)</label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="120"
+               placeholder="you@example.com" required>
+        <label for="password">Password (demo only)</label>
+        <input id="password" name="password" type="password" autocomplete="off"
+               minlength="1" maxlength="120" placeholder="Enter any demo password" required>
+        <button type="submit">Open my profile ↗</button>
+        <div id="errorMessage" class="error" role="alert"></div>
+      </form>
+      <div class="notice"><strong>Prototype only:</strong> this is not real authentication. Do not use a real password or sensitive information. Nothing is sent to a server, and the password is not saved.</div>
+    </section>
+
+    <section class="card hidden" id="profilePage" aria-live="polite">
+      <h2>Your profile</h2>
+      <p class="intro">Welcome to your space. This profile is a local demo.</p>
+      <div class="profile-head">
+        <div class="avatar" id="avatar">N</div>
+        <div>
+          <div id="profileName" style="font-size:20px;font-weight:750">Your name</div>
+          <div id="profileEmail" class="email">you@example.com</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">AI assistant</div>
+        <div class="stat-value">Nov · Not connected yet</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Account status</div>
+        <div class="stat-value" style="color:var(--good)">Local demo profile</div>
+      </div>
+      <button class="secondary" id="logoutButton" type="button">Log out</button>
+      <div class="notice">Next step: connect a real authentication service and database before using real accounts.</div>
+    </section>
+
+    <footer>Nov prototype · Lightweight single-file website · No server or database connected</footer>
+  </main>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginPage = document.getElementById('loginPage');
+    const profilePage = document.getElementById('profilePage');
+    const errorMessage = document.getElementById('errorMessage');
+    const passwordInput = document.getElementById('password');
+
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('displayName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = passwordInput.value;
+
+      if (!name || !email || !password) {
+        errorMessage.textContent = 'Please fill in all three fields to preview the profile.';
+        return;
+      }
+
+      document.getElementById('profileName').textContent = name;
+      document.getElementById('profileEmail').textContent = email;
+      document.getElementById('avatar').textContent = name.charAt(0).toUpperCase();
+      passwordInput.value = ''; // Never retain the demo password.
+      errorMessage.textContent = '';
+      loginPage.classList.add('hidden');
+      profilePage.classList.remove('hidden');
+    });
+
+    document.getElementById('logoutButton').addEventListener('click', function () {
+      loginForm.reset();
+      passwordInput.value = '';
+      profilePage.classList.add('hidden');
+      loginPage.classList.remove('hidden');
+      document.getElementById('displayName').focus();
+    });
+  </script>
+</body>
+</html>
